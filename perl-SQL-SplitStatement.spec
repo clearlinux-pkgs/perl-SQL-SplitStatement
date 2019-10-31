@@ -4,14 +4,17 @@
 #
 Name     : perl-SQL-SplitStatement
 Version  : 1.00020
-Release  : 1
+Release  : 2
 URL      : https://cpan.metacpan.org/authors/id/E/EM/EMAZEP/SQL-SplitStatement-1.00020.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/E/EM/EMAZEP/SQL-SplitStatement-1.00020.tar.gz
 Summary  : 'Split any SQL code into atomic statements'
 Group    : Development/Tools
-License  : Artistic-1.0-Perl
+License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-SQL-SplitStatement-bin = %{version}-%{release}
+Requires: perl-SQL-SplitStatement-license = %{version}-%{release}
 Requires: perl-SQL-SplitStatement-man = %{version}-%{release}
+Requires: perl-SQL-SplitStatement-perl = %{version}-%{release}
+Requires: perl(SQL::Tokenizer)
 BuildRequires : buildreq-cpan
 BuildRequires : perl(Class::Accessor::Fast)
 BuildRequires : perl(Exporter::Tiny)
@@ -29,6 +32,7 @@ version 1.00020
 %package bin
 Summary: bin components for the perl-SQL-SplitStatement package.
 Group: Binaries
+Requires: perl-SQL-SplitStatement-license = %{version}-%{release}
 
 %description bin
 bin components for the perl-SQL-SplitStatement package.
@@ -40,10 +44,17 @@ Group: Development
 Requires: perl-SQL-SplitStatement-bin = %{version}-%{release}
 Provides: perl-SQL-SplitStatement-devel = %{version}-%{release}
 Requires: perl-SQL-SplitStatement = %{version}-%{release}
-Requires: perl-SQL-SplitStatement = %{version}-%{release}
 
 %description dev
 dev components for the perl-SQL-SplitStatement package.
+
+
+%package license
+Summary: license components for the perl-SQL-SplitStatement package.
+Group: Default
+
+%description license
+license components for the perl-SQL-SplitStatement package.
 
 
 %package man
@@ -54,8 +65,18 @@ Group: Default
 man components for the perl-SQL-SplitStatement package.
 
 
+%package perl
+Summary: perl components for the perl-SQL-SplitStatement package.
+Group: Default
+Requires: perl-SQL-SplitStatement = %{version}-%{release}
+
+%description perl
+perl components for the perl-SQL-SplitStatement package.
+
+
 %prep
 %setup -q -n SQL-SplitStatement-1.00020
+cd %{_builddir}/SQL-SplitStatement-1.00020
 
 %build
 export http_proxy=http://127.0.0.1:9/
@@ -79,6 +100,8 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-SQL-SplitStatement
+cp %{_builddir}/SQL-SplitStatement-1.00020/LICENSE %{buildroot}/usr/share/package-licenses/perl-SQL-SplitStatement/d4427d2ab15fe70c339dcd95ed4861c30e06e5a0
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -91,7 +114,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/SQL/SplitStatement.pm
 
 %files bin
 %defattr(-,root,root,-)
@@ -101,6 +123,14 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 %defattr(-,root,root,-)
 /usr/share/man/man3/SQL::SplitStatement.3
 
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-SQL-SplitStatement/d4427d2ab15fe70c339dcd95ed4861c30e06e5a0
+
 %files man
 %defattr(0644,root,root,0755)
 /usr/share/man/man1/sql-split.1
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.28.2/SQL/SplitStatement.pm
