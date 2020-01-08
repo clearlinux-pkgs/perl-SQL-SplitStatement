@@ -4,7 +4,7 @@
 #
 Name     : perl-SQL-SplitStatement
 Version  : 1.00020
-Release  : 2
+Release  : 3
 URL      : https://cpan.metacpan.org/authors/id/E/EM/EMAZEP/SQL-SplitStatement-1.00020.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/E/EM/EMAZEP/SQL-SplitStatement-1.00020.tar.gz
 Summary  : 'Split any SQL code into atomic statements'
@@ -133,4 +133,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/SQL/SplitStatement.pm
+/usr/lib/perl5/vendor_perl/5.30.1/SQL/SplitStatement.pm
