@@ -1,7 +1,9 @@
-1.00020
+1.00023
+perl(Algorithm::Diff)
 perl(Class::Accessor::Fast)
 perl(Exporter::Tiny)
 perl(List::MoreUtils)
 perl(Regexp::Common)
-perl(SQL::Tokenizer)
+perl(Test::Differences)
 perl(Test::Exception)
+perl(Text::Diff)
