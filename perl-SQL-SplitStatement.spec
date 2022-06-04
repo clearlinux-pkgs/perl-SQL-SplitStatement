@@ -4,13 +4,14 @@
 #
 Name     : perl-SQL-SplitStatement
 Version  : 1.00023
-Release  : 8
+Release  : 9
 URL      : https://cpan.metacpan.org/authors/id/V/VE/VEESH/SQL-SplitStatement-1.00023.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/V/VE/VEESH/SQL-SplitStatement-1.00023.tar.gz
 Summary  : 'Split any SQL code into atomic statements'
 Group    : Development/Tools
-License  : Artistic-1.0-Perl
+License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-SQL-SplitStatement-bin = %{version}-%{release}
+Requires: perl-SQL-SplitStatement-license = %{version}-%{release}
 Requires: perl-SQL-SplitStatement-man = %{version}-%{release}
 Requires: perl-SQL-SplitStatement-perl = %{version}-%{release}
 Requires: perl(SQL::Tokenizer)
@@ -63,6 +64,7 @@ my @statements = $sql_splitter->split($sql_code);
 %package bin
 Summary: bin components for the perl-SQL-SplitStatement package.
 Group: Binaries
+Requires: perl-SQL-SplitStatement-license = %{version}-%{release}
 
 %description bin
 bin components for the perl-SQL-SplitStatement package.
@@ -77,6 +79,14 @@ Requires: perl-SQL-SplitStatement = %{version}-%{release}
 
 %description dev
 dev components for the perl-SQL-SplitStatement package.
+
+
+%package license
+Summary: license components for the perl-SQL-SplitStatement package.
+Group: Default
+
+%description license
+license components for the perl-SQL-SplitStatement package.
 
 
 %package man
@@ -122,6 +132,8 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-SQL-SplitStatement
+cp %{_builddir}/SQL-SplitStatement-1.00023/LICENSE %{buildroot}/usr/share/package-licenses/perl-SQL-SplitStatement/354a709ad184caf5bd314c07d6dd295f2dced181
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -144,11 +156,14 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 /usr/share/man/man3/SQL::SplitStatement.3
 /usr/share/man/man3/SQL::SplitStatement::Tokenizer.3
 
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-SQL-SplitStatement/354a709ad184caf5bd314c07d6dd295f2dced181
+
 %files man
 %defattr(0644,root,root,0755)
 /usr/share/man/man1/sql-split.1
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.34.0/SQL/SplitStatement.pm
-/usr/lib/perl5/vendor_perl/5.34.0/SQL/SplitStatement/Tokenizer.pm
+/usr/lib/perl5/*
