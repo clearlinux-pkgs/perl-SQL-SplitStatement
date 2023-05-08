@@ -4,7 +4,7 @@
 #
 Name     : perl-SQL-SplitStatement
 Version  : 1.00023
-Release  : 10
+Release  : 11
 URL      : https://cpan.metacpan.org/authors/id/V/VE/VEESH/SQL-SplitStatement-1.00023.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/V/VE/VEESH/SQL-SplitStatement-1.00023.tar.gz
 Summary  : 'Split any SQL code into atomic statements'
